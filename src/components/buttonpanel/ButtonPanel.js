@@ -6,33 +6,33 @@ export default class ButtonPanel extends React.Component {
     return (
       <div className="{button-panel}">
         <div id="first-row">
-          <Button name="AC" />
-          <Button name="+/-" />
-          <Button name="%" />
-          <Button name="+" />
+          <Button appFunction={this.props.charHandler} name="AC" />
+          <Button appFunction={this.props.charHandler} name="+/-" />
+          <Button appFunction={this.props.charHandler} name="%" />
+          <Button appFunction={this.props.charHandler} name="+" />
         </div>
         <div id="second-row">
-          <Button name="7" />
-          <Button name="8" />
-          <Button name="9" />
-          <Button name="x" />
+          <Button appFunction={this.props.charHandler} name="7" />
+          <Button appFunction={this.props.charHandler} name="8" />
+          <Button appFunction={this.props.charHandler} name="9" />
+          <Button appFunction={this.props.charHandler} name="x" />
         </div>
         <div id="third-row">
-          <Button name="4" />
-          <Button name="5" />
-          <Button name="6" />
+          <Button appFunction={this.props.charHandler} name="4" />
+          <Button appFunction={this.props.charHandler} name="5" />
+          <Button appFunction={this.props.charHandler} name="6" />
           <Button name="-" />
         </div>
         <div id="forth-row">
-          <Button name="1" />
-          <Button name="2" />
-          <Button name="3" />
-          <Button name="+" />
+          <Button appFunction={this.props.charHandler} name="1" />
+          <Button appFunction={this.props.charHandler} name="2" />
+          <Button appFunction={this.props.charHandler} name="3" />
+          <Button appFunction={this.props.charHandler} name="+" />
         </div>
         <div id="last-row">
-          <Button name="0" />
-          <Button name="." />
-          <Button name="=" />
+          <Button appFunction={this.props.charHandler} name="0" />
+          <Button appFunction={this.props.charHandler} name="." />
+          <Button appFunction={this.props.charHandler} name="=" />
         </div>
       </div>
     );

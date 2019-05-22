@@ -9,10 +9,14 @@ class App extends Component {
     return (
       <div className="calculator">
         <Display />
-        <ButtonPanel />
+        <ButtonPanel charHandler={this.handle} />
       </div>
     );
   }
+
+  handle = char => {
+    console.log(char);
+  };
 }
 
 export default App;
