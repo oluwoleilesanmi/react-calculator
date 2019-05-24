@@ -9,7 +9,7 @@ export default class ButtonPanel extends React.Component {
           <Button appFunction={this.props.charHandler} name="AC" />
           <Button appFunction={this.props.charHandler} name="+/-" />
           <Button appFunction={this.props.charHandler} name="%" />
-          <Button appFunction={this.props.charHandler} name="+" />
+          <Button appFunction={this.props.charHandler} name="/" />
         </div>
         <div id="second-row">
           <Button appFunction={this.props.charHandler} name="7" />
@@ -21,7 +21,7 @@ export default class ButtonPanel extends React.Component {
           <Button appFunction={this.props.charHandler} name="4" />
           <Button appFunction={this.props.charHandler} name="5" />
           <Button appFunction={this.props.charHandler} name="6" />
-          <Button name="-" />
+          <Button appFunction={this.props.charHandler} name="-" />
         </div>
         <div id="forth-row">
           <Button appFunction={this.props.charHandler} name="1" />

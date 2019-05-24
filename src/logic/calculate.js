@@ -1,55 +1,79 @@
 import operate from "./operate";
 
-const calculate = (calculator, buttonName) => {
-  switch (buttonName) {
-    case "AC":
-      calculator.total = null;
-      calculator.next = null;
-      calculator.operation = null;
-      break;
-    case "+/-":
-      calculator.total = calculator.total * -1;
-      break;
-    case "/":
-      calculator.operation = "/";
-      calculator.total = calculator.next;
-      calculator.next = "";
-      break;
-    case "%":
-      calculator.operation = "%";
-      calculator.total = calculator.next;
-      calculator.next = "";
-      break;
-    case "X":
-      calculator.operation = "X";
-      calculator.total = calculator.next;
-      calculator.next = "";
-      break;
-    case "-":
-      calculator.operation = "-";
-      calculator.total = calculator.next;
-      calculator.next = "";
-      break;
-    case "+":
-      calculator.operation = "+";
-      calculator.total = calculator.next;
-      calculator.next = "";
-      break;
-    case "=":
-      calculator.total = operate(
-        calculator.total,
-        calculator.next,
-        calculator.operation
-      );
-      calculator.next = "";
-      calculator.operation = "=";
-      break;
-    default:
-      calculator.next === null
-        ? (calculator.next = buttonName)
-        : (calculator.next = calculator.next + buttonName);
+const calculate = (stateData, btnName) => {
+  let { total, next, operator, clear } = stateData;
+
+  if (clear === true && numMatched(btnName)) {
+    total = btnName;
+    operator = "";
+    next = "";
+    clear = false;
+    return { total, next, operator, clear };
   }
-  return calculator;
+  clear = false;
+
+  if (!isNaN(btnName) || (operator === "%" && numMatched(btnName))) {
+    if (operator === "%") {
+      next = btnName;
+      total = operate(total, next, operator);
+      operator = "";
+      next = "";
+    } else {
+      operator === ""
+        ? (total = concat(total, btnName))
+        : (next = concat(next, btnName));
+    }
+  } else if (btnName === ".") {
+    if (operator === "" && total.indexOf(".") === -1) {
+      total = concat(total, btnName);
+    } else if (operator !== "" && next.indexOf(".") === -1) {
+      next = concat(next, btnName);
+    }
+  } else if (opMatched(btnName)) {
+    if (next === "") {
+      if (total !== "") operator = btnName;
+    } else {
+      total = operate(total, next, operator);
+      operator = btnName;
+      next = "";
+    }
+  } else if (btnName === "=") {
+    if (total && next) {
+      total = operate(total, next, operator);
+      operator = "";
+      next = "";
+      clear = true;
+    } else {
+      total = "";
+      operator = "";
+      next = "";
+    }
+  } else if (btnName === "%") {
+    if (next === "" && !isNaN(total)) {
+      total = operate(total, next, btnName);
+      operator = btnName;
+    }
+  } else if (btnName === "AC") {
+    total = "";
+    next = "";
+    operator = "";
+  } else if (btnName === "+/-") {
+    total = operate(total, "", btnName);
+  }
+
+  return { total, next, operator, clear };
+};
+
+let opMatched = btn => {
+  return ["x", "+", "-", "/"].includes(btn);
+};
+
+let numMatched = btn => {
+  return ["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(btn);
+};
+
+let concat = (stateChar, char) => {
+  return stateChar === "" ? char : stateChar + char;
 };
 
 export default calculate;

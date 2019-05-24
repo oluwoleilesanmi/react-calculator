@@ -1,42 +1,52 @@
 import Big from "big.js";
 
 const operate = (numOne, numTwo, operation) => {
-  numOne = Big(numOne);
-  if (!isBlank(numTwo)) numTwo = Big(numTwo);
-
   switch (operation) {
-    default:
-      return new Big(0).valueOf();
     case "+":
+      numOne = Big(numOne);
+      numTwo = Big(numTwo);
       return numOne.plus(numTwo).valueOf();
     case "-":
+      numOne = Big(numOne);
+      numTwo = Big(numTwo);
       return numOne.minus(numTwo).valueOf();
-    case "X":
+    case "x":
+      numOne = Big(numOne);
+      numTwo = Big(numTwo);
       return numOne.times(numTwo).valueOf();
     case "/":
-      validate(numTwo);
-      return numOne.div(numTwo).valueOf();
+      if (numTwo === "0") {
+        return "";
+      } else {
+        numOne = Big(numOne);
+        numTwo = Big(numTwo);
+        return numOne.div(numTwo).valueOf();
+      }
     case "%":
-      return percentage(numOne, numTwo);
+      return percentage(Number(numOne), numTwo);
+    case "+/-":
+      return String(Number(numOne) * -1);
+    default:
   }
-};
-
-const validate = num => {
-  if (num.valueOf() === "0") return "";
 };
 
 const percentage = (numOne, numTwo) => {
   if (numOne >= 0 && isBlank(numTwo)) {
-    return numOne.div(100).valueOf();
-  } else if (numOne >= 0 && numTwo >= 0) {
-    return numOne.div(100).times(numTwo).valueOf();
+    return Big(numOne)
+      .div(100)
+      .valueOf();
+  } else if (numOne >= 0 && Number(numTwo) >= 0) {
+    return Big(numOne)
+      .div(100)
+      .times(Big(Number(numTwo)))
+      .valueOf();
   } else {
     return "";
   }
 };
 
 const isBlank = numTwo => {
-  return numTwo === "_" ? true : false;
+  return numTwo === "" ? true : false;
 };
 
 export default operate;
