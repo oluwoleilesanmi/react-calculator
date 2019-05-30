@@ -16,12 +16,9 @@ const calculate = (stateData, btnName) => {
     if (operator === "%") {
       next = btnName;
       total = operate(total, next, operator);
-      operator = "";
-      next = "";
+      clear = true;
     } else {
-      operator === ""
-        ? (total = concat(total, btnName))
-        : (next = concat(next, btnName));
+      operator === "" ? (total = concat(total, btnName)) : (next = concat(next, btnName));
     }
   } else if (btnName === ".") {
     if (operator === "" && total.indexOf(".") === -1) {
@@ -33,6 +30,7 @@ const calculate = (stateData, btnName) => {
     if (next === "") {
       if (total !== "") operator = btnName;
     } else {
+      console.log("inside");
       total = operate(total, next, operator);
       operator = btnName;
       next = "";
@@ -40,7 +38,7 @@ const calculate = (stateData, btnName) => {
   } else if (btnName === "=") {
     if (total && next) {
       total = operate(total, next, operator);
-      operator = "";
+      operator = "=";
       next = "";
       clear = true;
     } else {

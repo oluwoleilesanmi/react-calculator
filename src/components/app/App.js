@@ -13,21 +13,25 @@ class App extends Component {
   render() {
     return (
       <div className="calculator">
-        <Display result={this.state.total} />
+        <Display result={this.renderLogic()} />
         <ButtonPanel charHandler={this.handle} />
       </div>
     );
   }
 
+  renderLogic = () => {
+    const { total, next, operator } = this.state;
+    if (operator === "%") return this.state.total;
+    if (total && !next && !operator) return total;
+    if (operator === "=" && total) return total;
+    if (operator === "x" || operator === "-" || operator === "+" || operator === "/" || 
+        (operator === "%" && (total && next))) return next ? next : operator;
+  };
+
   handle = char => {
     let data = calculate(this.state, char);
-
-    this.setState({
-      total: data.total,
-      next: data.next,
-      operator: data.operator,
-      clear: data.clear
-    });
+    this.setState({ total: data.total, next: data.next, 
+                   operator: data.operator, clear: data.clear });
   };
 }
 
