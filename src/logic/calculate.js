@@ -69,7 +69,7 @@ let opMatched = btn => {
 };
 
 let numMatched = btn => {
-  return ["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(btn);
+  return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(btn);
 };
 
 let concat = (stateChar, char) => {
