@@ -21,7 +21,7 @@ class App extends Component {
 
   renderLogic = () => {
     const { total, next, operator } = this.state;
-    if (operator === "%") return this.state.total;
+    if (operator === "%") return total;
     if (total && !next && !operator) return total;
     if (operator === "=" && total) return total;
     if (operator === "x" || operator === "-" || operator === "+" || operator === "/" || 
