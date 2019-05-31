@@ -1,6 +1,8 @@
 import React from "react";
 import "./ButtonPanel.css";
 import Button from "../button/Button";
+import PropTypes from 'prop-types'
+
 export default class ButtonPanel extends React.Component {
   render() {
     return (
@@ -37,4 +39,8 @@ export default class ButtonPanel extends React.Component {
       </div>
     );
   }
+}
+
+ButtonPanel.propTypes = {
+    charHandler: PropTypes.func,
 }

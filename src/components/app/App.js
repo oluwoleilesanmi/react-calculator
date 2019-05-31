@@ -28,10 +28,11 @@ class App extends Component {
         (operator === "%" && (total && next))) return next ? next : operator;
   };
 
-  handle = char => {
-    let data = calculate(this.state, char);
-    this.setState({ total: data.total, next: data.next, 
-                   operator: data.operator, clear: data.clear });
+  handle = (char) => {
+    this.setState((prevState) => {
+      const data = calculate(prevState, char);
+      return data;
+    });
   };
 }
 

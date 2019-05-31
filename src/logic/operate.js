@@ -32,14 +32,9 @@ const operate = (numOne, numTwo, operation) => {
 
 const percentage = (numOne, numTwo) => {
   if (numOne >= 0 && isBlank(numTwo)) {
-    return Big(numOne)
-      .div(100)
-      .valueOf();
+    return Big(numOne).div(100).valueOf();
   } else if (numOne >= 0 && Number(numTwo) >= 0) {
-    return Big(numOne)
-      .div(100)
-      .times(Big(Number(numTwo)))
-      .valueOf();
+    return Big(numOne).div(100).times(Big(Number(numTwo))).valueOf();
   } else {
     return "";
   }

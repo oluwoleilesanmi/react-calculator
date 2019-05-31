@@ -1,30 +1,25 @@
 import React from "react";
 import "./Button.css";
+import PropTypes from 'prop-types'
 
-export default class Card extends React.Component {
-  render() {
-    return (
-      <div>
-        <div
-          onClick={this.passCharToApp}
-          className={"button"}
-          style={{
-            backgroundColor: this.pickBgColor(this.props.color),
-            width: this.pickWidth(this.props.widthx2)
-          }}
-        >
-          {this.props.name}
-        </div>
-      </div>
-    );
-  }
-  pickWidth = prop => {
+  const Button = props => (
+    <div onClick={() => props.appFunction(props.name)} className= "button" 
+      style={{ backgroundColor: pickBgColor(props.color), width: pickWidth(props.widthx2)}}>
+          {props.name}
+    </div>)
+  
+  const pickWidth = prop => {
     return prop ? "48.4%" : "24%";
   };
-  pickBgColor = prop => {
+  const pickBgColor = prop => {
     return prop || "#e29051";
   };
-  passCharToApp = () => {
-    this.props.appFunction(this.props.name);
-  };
-}
+
+  Button.propTypes = {
+    widthx2: PropTypes.bool,
+    name: PropTypes.string,
+    color: PropTypes.string,
+    appFunction: PropTypes.func
+  }
+
+export default Button;
