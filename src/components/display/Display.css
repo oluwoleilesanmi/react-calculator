@@ -1,0 +1,15 @@
+.display {
+  width: 92.7%;
+  color: #fff;
+  /* margin-top: 2px; */
+  position: relative;
+  background-color: rgb(71, 71, 71);
+  padding: 50px 30px 40px 0;
+}
+
+.result {
+  right: 0;
+  bottom: 0;
+  text-align: right;
+  position: absolute;
+}
